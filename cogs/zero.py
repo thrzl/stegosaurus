@@ -57,4 +57,4 @@ class zero(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Zero(bot))
+    bot.add_cog(zero(bot))
