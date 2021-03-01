@@ -84,4 +84,4 @@ async def reload(ctx: commands.Context, cog):
 client.load_extension("cogs.zero")
 client.load_extension("cogs.crypt")
 client.load_extension("jishaku")
-client.run("ODEzNzk0MTg4MjU2NzM5NDE5.YDUe5g.LTE_R50L4B2vQ-gcVjc1EK8XuT4")
+client.run("token")
