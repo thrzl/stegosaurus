@@ -6,7 +6,8 @@ once upon a time, there was this dude that was really bored. so he made a discor
 ## 🏗 feature log
 - [x] zero width character encoding/decoding
 - [x] caesar ciphers (beta)
-- [ ] binary encoding
+- [x] binary encoding
+- [x] a1z26 encoding
 - [ ] other types...
 
 ## 🥁 background
