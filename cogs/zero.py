@@ -1,6 +1,5 @@
 from discord.ext import commands
 import discord
-import binascii
 
 class zero(commands.Cog):
     def __init__(self,bot:commands.Bot):
@@ -50,11 +49,6 @@ class zero(commands.Cog):
         embed.add_field(name="original Text:",value=f"```{text}```")
         embed.add_field(name="hidden Text:",value=f"```{final}```")
         await ctx.send(embed=embed)
-
-
-
-
-
 
 def setup(bot):
     bot.add_cog(zero(bot))

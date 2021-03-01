@@ -1,0 +1,4 @@
+opencv-python
+discord.py
+aiohttp
+aiofiles
