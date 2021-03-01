@@ -25,13 +25,13 @@ class Stegosaurus(commands.Bot):
             self.member_count += i.member_count
 
 
-client = Stegosaurus(command_prefix=commands.when_mentioned_or('stego ','stegosaurus '),intents=intents,case_insensitive=True)
+client = Stegosaurus(command_prefix=commands.when_mentioned_or('stego ','stegosaurus ', 's'),intents=intents,case_insensitive=True)
 
 @client.event
 async def on_ready():
-    logger.info(f"Signed in as {client.user.name}")
-    logger.info(f"ID: {client.user.id}")
-    logger.info(f"Can see {len(client.guilds)} servers and {client.member_count} server members.")
+    logger.info(f"signed in as {client.user.name}")
+    logger.info(f"id: {client.user.id}")
+    logger.info(f"can see {len(client.guilds)} servers and {client.member_count} server members.")
 
 @client.event
 async def on_command(ctx):
@@ -41,7 +41,7 @@ async def on_command(ctx):
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         return
-    logger.error(f"Error {error} occurred in {ctx.command.name.lower()}")
+    logger.error(f"error {error} occurred in {ctx.command.name.lower()}")
     raise error
 
 @client.command()

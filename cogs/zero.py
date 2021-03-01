@@ -2,7 +2,7 @@ from discord.ext import commands
 import discord
 import binascii
 
-class Zero(commands.Cog):
+class zero(commands.Cog):
     def __init__(self,bot:commands.Bot):
         self.bot = bot
 
@@ -19,7 +19,7 @@ class Zero(commands.Cog):
         final = text + zwstring
         embed=discord.Embed(color=self.bot.color)
         embed.set_author(name=ctx.author.display_name,icon_url=ctx.author.avatar_url)
-        embed.add_field(name="Your Text:",value=f"```{final}```")
+        embed.add_field(name="your text:",value=f"```{final}```")
         await ctx.send(embed=embed)
 
     @commands.command('zdecode')
@@ -47,8 +47,8 @@ class Zero(commands.Cog):
             final += " "
         embed=discord.Embed(color=self.bot.color)
         embed.set_author(name=ctx.author.display_name,icon_url=ctx.author.avatar_url)
-        embed.add_field(name="Original Text:",value=f"```{text}```")
-        embed.add_field(name="Hidden Text:",value=f"```{final}```")
+        embed.add_field(name="original Text:",value=f"```{text}```")
+        embed.add_field(name="hidden Text:",value=f"```{final}```")
         await ctx.send(embed=embed)
 
 
