@@ -2,6 +2,7 @@ from sys import stdout
 import discord
 from discord.ext import commands, tasks
 import logging
+import itertools
 
 logging.basicConfig(
     level=logging.INFO,
@@ -12,12 +13,61 @@ logger = logging.getLogger()
 
 intents = discord.Intents.default()
 
+class Help(commands.MinimalHelpCommand):
+    def get_opening_note(self):
+        return super().get_opening_note().lower()
+
+    async def send_pages(self):
+        destination = self.get_destination()
+        for page in self.paginator.pages:
+            emby = discord.Embed(description=page,color = self.context.bot.color)
+            await destination.send(embed=emby)
+
+    def get_command_signature(self, command):
+        string = '%s%s %s' % (self.clean_prefix, command.qualified_name, command.signature)
+        return string.lower()
+
+    def add_bot_commands_formatting(self, commands, heading):
+        if commands:
+            joined = '\u2002'.join(c.name.lower() for c in commands)
+            self.paginator.add_line('__**%s**__' % heading)
+            self.paginator.add_line(joined)
+
+    async def send_bot_help(self, mapping):
+        ctx = self.context
+        bot = ctx.bot
+
+        if bot.description:
+            self.paginator.add_line(bot.description, empty=True)
+
+        note = self.get_opening_note()
+        if note:
+            self.paginator.add_line(note, empty=True)
+
+        no_category = 'other'
+        def get_category(command, *, no_category=no_category):
+            cog = command.cog
+            return cog.qualified_name.lower() if cog is not None else no_category
+
+        filtered = await self.filter_commands(bot.commands, sort=True, key=get_category)
+        to_iterate = itertools.groupby(filtered, key=get_category)
+
+        for category, commands in to_iterate:
+            commands = sorted(commands, key=lambda c: c.name) if self.sort_commands else list(commands)
+            self.add_bot_commands_formatting(commands, category)
+
+        note = self.get_ending_note()
+        if note:
+            self.paginator.add_line()
+            self.paginator.add_line(note)
+
+        await self.send_pages()
 
 class Stegosaurus(commands.Bot):
-    def __init__(self, command_prefix, help_command=None, description=None, **options):
+    def __init__(self, command_prefix, description=None, **options):
         super().__init__(
             command_prefix,
-            help_command=help_command,
+            help_command=Help(),
             description=description,
             **options,
         )
@@ -26,7 +76,7 @@ class Stegosaurus(commands.Bot):
         self.color = 0x5000FB
 
     def load_extension(self, name):
-        logger.info(f"Loaded {name}")
+        logger.info(f"loaded {name}")
         return super().load_extension(name)
 
     @tasks.loop(minutes=5, reconnect=True)
@@ -37,7 +87,7 @@ class Stegosaurus(commands.Bot):
 
 
 client = Stegosaurus(
-    command_prefix=commands.when_mentioned_or("stego ", "stegosaurus ", "s"),
+    command_prefix=commands.when_mentioned_or("stego ", "stegosaurus ", "s "),
     intents=intents,
     case_insensitive=True,
 )
@@ -84,4 +134,4 @@ async def reload(ctx: commands.Context, cog):
 client.load_extension("cogs.zero")
 client.load_extension("cogs.crypt")
 client.load_extension("jishaku")
-client.run("token")
+client.run("ODEzNzk0MTg4MjU2NzM5NDE5.YDUe5g.MNGIdnWJqJS6EgfzKMr7ymUzVxY")
