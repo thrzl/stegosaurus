@@ -1,40 +1,33 @@
 from discord.ext import commands
 import discord
-import aiohttp
-import aiofiles
-
+import typing
 
 class crypt(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+        self.alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'] * 50
         self.a1dict = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8, 'i': 9, 'j': 10, 'k': 11, 'l': 12, 'm': 13, 'n': 14, 'o': 15, 'p': 16, 'q': 17, 'r': 18, 's': 19, 't': 20, 'u': 21, 'v': 22, 'w': 23, 'x': 24, 'y': 25, 'z': 26}
 
-    def caesarenc(self, text: str):
+    def caesarenc(self, text: str, key: int):
         enc = ""
         for n, i in enumerate(text):
             if i != " ":
-                if i == "z":
-                    nxt = "a"
-                else:
-                    nxt = self.alphabet[self.alphabet.index(i) + 1]
+                nxt = self.alphabet[self.alphabet.index(i) + key]
                 enc += nxt
         return enc
 
-    def caesardec(self, text: str):
+    def caesardec(self, text: str, key: int):
         enc = ""
         for n, i in enumerate(text):
             if i != " ":
-                if i == "a":
-                    nxt = "z"
-                else:
-                    nxt = self.alphabet[self.alphabet.index(i) - 1]
+                nxt = self.alphabet[self.alphabet.index(i) - key]
                 enc += nxt
         return enc
 
     @commands.command("cencode", description="encrypt text using caesar cipher.")
-    async def cencode(self, ctx: commands.Context, text):
-        nt = self.caesarenc(text)
+    async def cencode(self, ctx: commands.Context, key:typing.Optional[int], text):
+        if not key: key = 13
+        nt = self.caesarenc(text, key)
         embed = discord.Embed(color=self.bot.color)
         embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
         embed.add_field(name="your new text", value=f"```{nt}```")
@@ -42,8 +35,9 @@ class crypt(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command("cdecode", description="decrypt text using caesar cipher.")
-    async def cdecode(self, ctx: commands.Context, text):
-        nt = self.caesardec(text)
+    async def cdecode(self, ctx: commands.Context, key:typing.Optional[int], text):
+        if not key: key = 13
+        nt = self.caesardec(text, key)
         embed = discord.Embed(color=self.bot.color)
         embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
         embed.add_field(name="your new text", value=f"```{nt}```")
@@ -112,7 +106,7 @@ class crypt(commands.Cog):
             print(c)
         embed = discord.Embed(color=self.bot.color)
         embed.set_author(name=ctx.author.display_name, icon_url=ctx.author.avatar_url)
-        embed.add_field(name="hidden Text:", value=f"```{final}```")
+        embed.add_field(name="hidden text:", value=f"```{final}```")
         await ctx.send(embed=embed)
 
 
