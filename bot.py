@@ -118,23 +118,23 @@ async def on_command_error(ctx, error):
 @client.command()
 @commands.is_owner()
 async def reload(ctx: commands.Context, cog):
-    message = f"Loaded `{cog}` successfully."
+    message = f"loaded `{cog}` successfully."
     try:
         client.unload_extension(f"cogs.{cog}")
+        message = f"cog {cog} reloaded successfully."
     except commands.ExtensionNotLoaded:
-        message = f"Cog {cog} reloaded successfully."
         pass
     except Exception as e:
         return await ctx.send(e)
     try:
         client.load_extension(f"cogs.{cog}")
     except commands.ExtensionFailed as e:
-        return await ctx.send(e)
+        return await ctx.send(str(e).lower())
     return await ctx.send(message)
 
 
 client.load_extension("cogs.zero")
 client.load_extension("cogs.crypt")
-
+client.load_extension("cogs.security")
 client.load_extension("jishaku")
 client.run("ODEzNzk0MTg4MjU2NzM5NDE5.YDUe5g.oKUwzIs9fVQQeJasPXr9d1oqMcw")
