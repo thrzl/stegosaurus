@@ -1,4 +1,5 @@
 # 🦕stegosaurus
+![Made withJupyter](https://img.shields.io/badge/Made%20with-Python-green?style=for-the-badge&logo=Python)\
 a steganography based discord bot, made with 💚 using 🐍
 
 ## 🔧 run it yourself
