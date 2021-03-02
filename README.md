@@ -1,12 +1,18 @@
 # 🦕stegosaurus
 a steganography based discord bot, made with 💚 using 🐍
-
+![Banner](https://wallpapercave.com/wp/p8UAuL3.jpg)
 ## 🔧 run it yourself
 to run stegosaurus yourself, you need to have python 3.8+ installed. after downloading and extracting the files, navigate to the folder and use:
 ```sh
-pip install -r requirements.txt # Linux
+pip install -r requirements.txt # linux
 
-py -3 -m pip install -r requirements.txt # Windows
+py -3 -m pip install -r requirements.txt # windows
+```
+now all that's left is to run it:
+```sh
+python3 bot.py # linux
+
+py -3 bot.py # windows
 ```
 
 ## 🏗 feature log
