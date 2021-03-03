@@ -7,6 +7,8 @@ class zero(commands.Cog):
 
     @commands.command('zencode')
     async def zencode(self,ctx:commands.Context,text:str,enctext):
+        if len(text)*8 + len(enctext) >= 1014:
+            return await ctx.send("that text is too long!")
         binarystr = ''.join(format(ord(i), '08b') for i in enctext)
         #binarystr = ' '.join(format(ord(l), 'b') for l in enctext)
         zwsp = '​'
@@ -46,8 +48,8 @@ class zero(commands.Cog):
             final += " "
         embed=discord.Embed(color=self.bot.color)
         embed.set_author(name=ctx.author.display_name,icon_url=ctx.author.avatar_url)
-        embed.add_field(name="original Text:",value=f"```{text}```")
-        embed.add_field(name="hidden Text:",value=f"```{final}```")
+        embed.add_field(name="original text:",value=f"```{text}```")
+        embed.add_field(name="hidden text:",value=f"```{final}```")
         await ctx.send(embed=embed)
 
 def setup(bot):

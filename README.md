@@ -21,7 +21,7 @@ py -3 bot.py # windows
 - [x] 🏛 caesar ciphers
 - [x] 💾 binary encoding
 - [x] 🔠🔢 a1z26 encoding
-- [ ] ⚠ error handling
+- [x] ⚠ error handling
 - [ ] ~~other types...~~
 
 ## 🥁 background

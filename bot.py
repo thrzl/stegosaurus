@@ -90,6 +90,7 @@ client = Stegosaurus(
     command_prefix=commands.when_mentioned_or("stego ", "stegosaurus ", "s "),
     intents=intents,
     case_insensitive=True,
+    description="a steganography bot created by mikey 🌌#4258 for swas.py's bot jam"
 )
 
 
@@ -112,7 +113,8 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         return
     logger.error(f"error {error} occurred in {ctx.command.name.lower()}")
-    raise error
+    embed=discord.Embed(title="error!", description=str(error).lower(), color=client.color)
+    await ctx.send(embed=embed)
 
 
 @client.command()
@@ -130,6 +132,8 @@ async def reload(ctx: commands.Context, cog):
         client.load_extension(f"cogs.{cog}")
     except commands.ExtensionFailed as e:
         return await ctx.send(str(e).lower())
+    except commands.ExtensionNotFound as e:
+        return await ctx.send(f"couldn't find `cogs.{cog}`.")
     return await ctx.send(message)
 
 
@@ -137,4 +141,4 @@ client.load_extension("cogs.zero")
 client.load_extension("cogs.crypt")
 client.load_extension("cogs.security")
 client.load_extension("jishaku")
-client.run("token")
+client.run("ODEzNzk0MTg4MjU2NzM5NDE5.YDUe5g.PI8KQ_Klx-00IGQvs9_dFixhfF0")
