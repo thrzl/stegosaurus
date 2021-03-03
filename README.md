@@ -3,7 +3,7 @@
 a steganography based discord bot, made with 💚 using 🐍
 
 ## 🔧 run it yourself
-to run stegosaurus yourself, you need to have python 3.8+ installed. after downloading and extracting the files, navigate to the folder and use:
+to run stegosaurus yourself, you need to have 🐍 3.8+ installed. after downloading and extracting the files, navigate to the folder and use:
 ```sh
 pip install -r requirements.txt # linux
 
@@ -17,11 +17,11 @@ py -3 bot.py # windows
 ```
 
 ## 🏗 feature log
-- [x] zero width character encoding/decoding
-- [x] caesar ciphers
-- [x] binary encoding
-- [x] a1z26 encoding
-- [ ] error handling
+- [x] 0️⃣ zero width character encoding/decoding
+- [x] 🏛 caesar ciphers
+- [x] 💾 binary encoding
+- [x] 🔠🔢 a1z26 encoding
+- [ ] ⚠ error handling
 - [ ] ~~other types...~~
 
 ## 🥁 background
