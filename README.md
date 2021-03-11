@@ -2,6 +2,8 @@
 ![Made withJupyter](https://img.shields.io/badge/Made%20with-Python-green?style=for-the-badge&logo=Python)\
 a steganography based discord bot, made with 💚 using 🐍
 
+#### invite the bot [here](https://discord.com/api/oauth2/authorize?client_id=813794188256739419&permissions=93248&scope=bot)
+
 ## 🔧 run it yourself
 to run stegosaurus yourself, you need to have 🐍 3.8+ installed. after downloading and extracting the files, navigate to the folder and use:
 ```sh
